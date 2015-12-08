@@ -9,7 +9,7 @@ background_color = (255, 255, 255)
 
 def main():
 	screen = pygame.display.set_mode((width, height))
-	pygame.display.set_caption("Tutorial 4")
+	pygame.display.set_caption("Tutorial 5")
 
 	num_particles = 10;
 	my_particles = []
@@ -21,7 +21,7 @@ def main():
 
 		my_particle = particle.Particle(screen, (x, y), size)
 		my_particle.speed = random.random()
-		particle.angle = random.uniform(0, math.pi*2)
+		my_particle.angle = random.uniform(0, math.pi*4)
 		
 		my_particles.append(my_particle)
 
@@ -37,6 +37,8 @@ def main():
 			my_particle.move()
 			my_particle.display()
 		pygame.display.flip()
+
+	return
 
 
 if __name__ == '__main__':
