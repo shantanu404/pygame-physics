@@ -9,7 +9,7 @@ background_color = (255, 255, 255)
 
 def main():
 	screen = pygame.display.set_mode((width, height))
-	pygame.display.set_caption("Tutorial 5")
+	pygame.display.set_caption("Tutorial 6")
 
 	num_particles = 10;
 	my_particles = []
