@@ -5,16 +5,18 @@ import utils
 import force
 
 class Particle(object):
-	"""docstring for Particle"""
-	def __init__(self, screen, pos, size):
+	"""Particle"""
+	def __init__(self, screen, pos, size, mass = 1):
 		self.x = pos[0]
 		self.y = pos[1]
 		self.size = size
 		self.color = (10, 10, 10)
-		self.thickness = 1
+		self.thickness = size
 		self.screen = screen
 		self.speed = 0.01
 		self.angle = 0
+		self.mass = mass
+		self.drag = (self.mass/(self.mass + force.DRAG)) ** self.size
 		return
 	
 	def display(self):
@@ -23,7 +25,7 @@ class Particle(object):
 	
 	def move(self):
 		(self.angle, self.speed) = utils.add_vectors((self.angle, self.speed), force.GRAVITY)
-		self.speed *= (1 - force.DRAG)
+		self.speed *= self.drag
 		self.x += (math.sin(self.angle) * self.speed)
 		self.y += (math.cos(self.angle) * self.speed)
 		self.bounce()

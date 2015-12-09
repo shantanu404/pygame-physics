@@ -5,22 +5,24 @@ import pygame
 import particle
 import utils
 
-background_color = (255, 255, 255)
+background_color = (0, 0, 0)
 (width, height) = (600, 400)
 
 def main():
 	screen = pygame.display.set_mode((width, height))
-	pygame.display.set_caption("Tutorial 8")
+	pygame.display.set_caption("Tutorial 9")
 
-	num_particles = 4;
+	num_particles = 10;
 	my_particles = []
 
 	for n in range(num_particles):
 		size = random.randint(10, 20)
+		density = random.randint(1, 20)
 		x = random.randint(size, width-size)
 		y = random.randint(size, height-size)
 
-		my_particle = particle.Particle(screen, (x, y), size)
+		my_particle = particle.Particle(screen, (x, y), size, density*size**2)
+		my_particle.color = (200-density*10, 200-density*10, 255)
 		my_particle.speed = random.random()
 		my_particle.angle = random.uniform(0, math.pi*4)
 		

@@ -22,20 +22,17 @@ def collide(p1, p2):
 
 	dist = math.hypot(dx, dy)
 	if dist < p1.size + p2.size:
-		# print("Bang!")
-		tangent = math.atan2(dy, dx)
-		angle = 0.5 * math.pi + tangent
+		angle = math.atan2(dy, dx) + math.pi/2
+		total_mass = p1.mass + p2.mass
 
-		angle1 = 2*tangent - p1.angle
-		angle2 = 2*tangent - p2.angle
-		speed1 = p2.speed*force.ELASTICITY
-		speed2 = p1.speed*force.ELASTICITY
+		(p1.angle, p1.speed) = add_vectors((p1.angle, p1.speed*(p1.mass-p2.mass)/total_mass),
+											(angle+math.pi, 2*p1.speed/total_mass))
 
-		(p1.angle, p1.speed) = (angle1, speed1)
-		(p2.angle, p2.speed) = (angle2, speed2)
+		overlap = 0.5*(p1.size + p2.size - dist+1)
+		p1.x += math.sin(angle)*overlap
+		p1.y -= math.cos(angle)*overlap
+		p2.x -= math.sin(angle)*overlap
+		p2.y += math.cos(angle)*overlap
 
-		angle = 0.5 * math.pi + tangent
-		p1.x += math.sin(angle)
-		p1.y -= math.cos(angle)
-		p2.x -= math.sin(angle)
-		p2.y += math.cos(angle)
+		p1.speed *= force.ELASTICITY
+		p2.speed *= force.ELASTICITY
