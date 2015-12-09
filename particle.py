@@ -1,7 +1,7 @@
 import pygame
 import math
 
-import vector
+import utils
 import force
 
 class Particle(object):
@@ -21,7 +21,7 @@ class Particle(object):
 		return
 	
 	def move(self):
-		(self.angle, self.speed) = vector.add_vectors((self.angle, self.speed), force.GRAVITY)
+		(self.angle, self.speed) = utils.add_vectors((self.angle, self.speed), force.GRAVITY)
 		self.speed *= (1 - force.DRAG)
 		self.x += (math.sin(self.angle) * self.speed)
 		self.y += (math.cos(self.angle) * self.speed)
