@@ -7,7 +7,8 @@ import force
 class Particle(object):
 	"""docstring for Particle"""
 	def __init__(self, screen, pos, size):
-		(self.x, self.y) = pos
+		self.x = pos[0]
+		self.y = pos[1]
 		self.size = size
 		self.color = (10, 10, 10)
 		self.thickness = 1

@@ -10,9 +10,9 @@ background_color = (255, 255, 255)
 
 def main():
 	screen = pygame.display.set_mode((width, height))
-	pygame.display.set_caption("Tutorial 7")
+	pygame.display.set_caption("Tutorial 8")
 
-	num_particles = 3;
+	num_particles = 4;
 	my_particles = []
 
 	for n in range(num_particles):
@@ -33,11 +33,11 @@ def main():
 			if event.type == pygame.QUIT:
 				running = False
 
-			if event.type == pygame.MOUSEBUTTONDOWN:
+			elif event.type == pygame.MOUSEBUTTONDOWN:
 				(mouseX, mouseY) = pygame.mouse.get_pos()
 				selected = utils.find_particle(my_particles, mouseX, mouseY)
 			
-			if event.type == pygame.MOUSEBUTTONUP:
+			elif event.type == pygame.MOUSEBUTTONUP:
 				selected = None;
 
 		if selected:
@@ -45,14 +45,16 @@ def main():
 			dx = mouseX - selected.x
 			dy = mouseY - selected.y
 			selected.angle = math.atan2(dy, dx) + (math.pi/2)
-			selected.speed = math.hypot(dx, dy) * 0.05
+			selected.speed = math.hypot(dx, dy) * 0.005
 
 		screen.fill(background_color)
 
-		for my_particle in my_particles:
-			# if selected != my_particle:
+		for i, my_particle in enumerate(my_particles):
 			my_particle.move()
+			for particle2 in my_particles[i + 1:]:
+				utils.collide(my_particle, particle2)
 			my_particle.display()
+
 		pygame.display.flip()
 
 	return
