@@ -7,3 +7,9 @@ def add_vectors(vector1, vector2):
 	mag = math.hypot(x, y)
 	angle = (math.pi/2) - math.atan2(y, x)
 	return (angle, mag)
+
+def find_particle(particles, x, y):
+	for p in particles:
+		if math.hypot(p.x - x, p.y - y) <= p.size:
+			return p
+	return
